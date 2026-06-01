@@ -18,7 +18,7 @@
 To create a Cloudflare API token for your specific DNS zone, follow these steps:
 
 1. Go to https://dash.cloudflare.com/profile/api-tokens
-2. Search for "Edit zone DNS" in "API token templates"
+2. Search for ```Edit zone DNS``` in ```API token templates```
 3. Select ```Use template```
 4. The following permission is required:
    * ```Zone - DNS - Edit```
@@ -67,7 +67,7 @@ pip install -r requirements.txt
 | Option           | Description                                                                                                  | Example                                                              |
 | ---------------- | ------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------- |
 | EXTERNAL_IP_APIS | Required for ```IP=external```. URLs used to determine your public IP. You can separate multiple URLs with commas. | https://api.ipify.org/,https://icanhazip.com/,https://ifconfig.me/ip |
-| INTERFACE        | Required for IP=internal. Sets the local network interface used to fetch the IP address.                     | e.g. eth0, wlan0. Look for a suitable interface with `ip a`          |
+| INTERFACE        | Required for ```IP=internal```. Sets the local network interface used to fetch the IP address.                     | e.g. eth0, wlan0. Look for a suitable interface with `ip a`          |
 
 # Usage
 ## Run the script manually
