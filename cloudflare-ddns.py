@@ -63,11 +63,22 @@ def get_external_ip(external_ip_apis: list[str]) -> ipaddress.IPv4Address | ipad
 def get_internal_ip(interface: str) -> ipaddress.IPv4Address | ipaddress.IPv6Address:
     if interface not in netifaces.interfaces():
         raise ValueError(f"Interface {interface} does not exist!")
-    try:
-        addr = netifaces.ifaddresses(interface)[netifaces.AF_INET][0]['addr']
-        return ipaddress.ip_address(addr)
-    except KeyError:
-        raise ValueError(f"Interface {interface} does not have an IPv4 address.")
+
+    addresses = netifaces.ifaddresses(interface)
+
+    if netifaces.AF_INET6 in addresses:
+        for address_info in addresses[netifaces.AF_INET6]:
+            address= address_info['addr'].split('%')[0]
+            ip = ipaddress.ip_address(address)
+            if not ip.is_link_local:
+                return ip
+
+    # Fallback IPv4
+    if netifaces.AF_INET in addresses:
+        address = addresses[netifaces.AF_INET][0]['addr']
+        return ipaddress.ip_address(address)
+
+    raise ValueError(f"Interface {interface} has no usable IPv4 or global IPv6 address.")
 
 def get_ip(mode: bool, external_ip_apis: list[str], interface: str) -> ipaddress.IPv4Address | ipaddress.IPv6Address:
     return get_external_ip(external_ip_apis) if mode else get_internal_ip(interface)
