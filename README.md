@@ -141,4 +141,5 @@ EXTERNAL_IP_APIS="https://api.ipify.org/,https://icanhazip.com/,https://ifconfig
 ## e.g. eth0, wlan0, ...
 INTERFACE="eth0"
 ```
-
+# License
+Distributed under the MIT License. See LICENSE for more information.
