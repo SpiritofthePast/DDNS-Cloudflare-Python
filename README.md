@@ -83,20 +83,27 @@ python cloudflare-ddns.py
 ## Run the script using crontab
 
 Run every 5 minutes:
-
+```
 */5 * * * * cd /opt/cloudflare-ddns && .venv/bin/python cloudflare-ddns.py
+```
 
 Run at boot:
 
+```
 @reboot cd /opt/cloudflare-ddns && .venv/bin/python cloudflare-ddns.py
+```
 
 Run 1 minute after boot:
 
+```
 @reboot sleep 60 && cd /opt/cloudflare-ddns && .venv/bin/python cloudflare-ddns.py
+```
 
 Run daily at 05:00:
 
+```
 0 5 * * * cd /opt/cloudflare-ddns && .venv/bin/python cloudflare-ddns.py
+```
 
 # Logging
 
