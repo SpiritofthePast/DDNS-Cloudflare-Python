@@ -1,4 +1,4 @@
 cloudflare
 requests
-netifaces
+psutil
 python-dotenv

@@ -1,10 +1,10 @@
 import ipaddress
 import cloudflare
 import requests
-import netifaces
 import os
 import sys
 import logging
+import psutil
 from logging.handlers import RotatingFileHandler
 from typing import Any
 from dotenv import load_dotenv
@@ -61,24 +61,22 @@ def get_external_ip(external_ip_apis: list[str]) -> ipaddress.IPv4Address | ipad
     raise Exception("All external IP API providers failed!")
 
 def get_internal_ip(interface: str) -> ipaddress.IPv4Address | ipaddress.IPv6Address:
-    if interface not in netifaces.interfaces():
-        raise ValueError(f"Interface {interface} does not exist!")
+    if interface not in psutil.net_if_addrs():
+        raise ValueError(f"Netzwerk-Interface {interface} existiert nicht!")
 
-    addresses = netifaces.ifaddresses(interface)
+    addresses = psutil.net_if_addrs().get(interface, [])
 
-    if netifaces.AF_INET6 in addresses:
-        for address_info in addresses[netifaces.AF_INET6]:
-            address= address_info['addr'].split('%')[0]
-            ip = ipaddress.ip_address(address)
+    for address in addresses:
+        if address.family == 10:
+            ip = ipaddress.ip_address(address.address.split('%')[0])
             if not ip.is_link_local:
                 return ip
+    # Fallback IPv4-Address
+    for address in addresses:
+        if address.family == 2:
+            return ipaddress.ip_address(address.address)
 
-    # Fallback IPv4
-    if netifaces.AF_INET in addresses:
-        address = addresses[netifaces.AF_INET][0]['addr']
-        return ipaddress.ip_address(address)
-
-    raise ValueError(f"Interface {interface} has no usable IPv4 or global IPv6 address.")
+    raise ValueError(f"Interface {interface} doesn't have a usuable IPv4- or global IPv6-Address!")
 
 def get_ip(mode: bool, external_ip_apis: list[str], interface: str) -> ipaddress.IPv4Address | ipaddress.IPv6Address:
     return get_external_ip(external_ip_apis) if mode else get_internal_ip(interface)
