@@ -19,13 +19,13 @@ To create a Cloudflare API token for your specific DNS zone, follow these steps:
 
 1. Go to https://dash.cloudflare.com/profile/api-tokens
 2. Search for "Edit zone DNS" in "API token templates"
-3. Select "Use template"
+3. Select ```Use template```
 4. The following permission is required:
-   * Zone - DNS - Edit
-5. Select the domain you want to use under "Zone Resources"
-   * Include - Specific zone - example.com
-6. Click on "Continue to summary"
-7. Click on "Create Token"
+   * ```Zone - DNS - Edit```
+5. Select the domain you want to use under ```Zone Resources```
+   * ```Include - Specific zone - example.com```
+6. Click on ```Continue to summary```
+7. Click on ```Create Token```
 
 # Installation
 1. Install dependencies if not already installed (Debian/Ubuntu):
@@ -66,7 +66,7 @@ pip install -r requirements.txt
 
 | Option           | Description                                                                                                  | Example                                                              |
 | ---------------- | ------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------- |
-| EXTERNAL_IP_APIS | Required for IP=external. URLs used to determine your public IP. You can separate multiple URLs with commas. | https://api.ipify.org/,https://icanhazip.com/,https://ifconfig.me/ip |
+| EXTERNAL_IP_APIS | Required for ```IP=external```. URLs used to determine your public IP. You can separate multiple URLs with commas. | https://api.ipify.org/,https://icanhazip.com/,https://ifconfig.me/ip |
 | INTERFACE        | Required for IP=internal. Sets the local network interface used to fetch the IP address.                     | e.g. eth0, wlan0. Look for a suitable interface with `ip a`          |
 
 # Usage
