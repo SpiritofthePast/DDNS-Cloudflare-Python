@@ -78,7 +78,9 @@ python cloudflare-ddns.py
 
 # Usage
 ## Run the script manually
+```bash
 python cloudflare-ddns.py
+```
 
 ## Run the script using crontab
 
