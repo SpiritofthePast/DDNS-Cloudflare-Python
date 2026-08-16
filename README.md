@@ -42,7 +42,7 @@ git clone https://github.com/SpiritofthePast/DDNS-Cloudflare-Python.git .
 3. Create a virtual environment and install dependencies:
 
 ```bash
-python -m venv .venv
+python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 ```
@@ -79,25 +79,25 @@ python cloudflare-ddns.py
 
 Run every 5 minutes:
 ```
-*/5 * * * * cd /opt/cloudflare-ddns && .venv/bin/python cloudflare-ddns.py
+*/5 * * * * cd /opt/cloudflare-ddns && .venv/bin/python3 cloudflare-ddns.py
 ```
 
 Run at boot:
 
 ```
-@reboot cd /opt/cloudflare-ddns && .venv/bin/python cloudflare-ddns.py
+@reboot cd /opt/cloudflare-ddns && .venv/bin/python3 cloudflare-ddns.py
 ```
 
 Run 1 minute after boot:
 
 ```
-@reboot sleep 60 && cd /opt/cloudflare-ddns && .venv/bin/python cloudflare-ddns.py
+@reboot sleep 60 && cd /opt/cloudflare-ddns && .venv/bin/python3 cloudflare-ddns.py
 ```
 
 Run daily at 05:00:
 
 ```
-0 5 * * * cd /opt/cloudflare-ddns && .venv/bin/python cloudflare-ddns.py
+0 5 * * * cd /opt/cloudflare-ddns && .venv/bin/python3 cloudflare-ddns.py
 ```
 
 # Logging
