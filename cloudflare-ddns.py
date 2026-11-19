@@ -62,7 +62,7 @@ def get_external_ip(external_ip_apis: list[str]) -> ipaddress.IPv4Address | ipad
 
 def get_internal_ip(interface: str) -> ipaddress.IPv4Address | ipaddress.IPv6Address:
     if interface not in psutil.net_if_addrs():
-        raise ValueError(f"Netzwerk-Interface {interface} existiert nicht!")
+        raise ValueError(f"Netzwerk-Interface {interface} does not exist!")
 
     addresses = psutil.net_if_addrs().get(interface, [])
 
